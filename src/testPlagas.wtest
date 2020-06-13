@@ -1,0 +1,83 @@
+import plagas.*
+import elementos.*
+
+test "Test a las plagas" {
+	/*Instancias y configuraciones de las clases Pulga, Garrapata, Mosquito y Cucaracha*/
+	const cucarachasVoladoras = new Cucaracha(poblacion=100, pesoPromedio=11)
+	const cucarachasMini = new Cucaracha(poblacion=250, pesoPromedio=8)
+	const cucharachasGigantes= new Cucaracha(poblacion=9, pesoPromedio=20)
+	
+	const pulguitas1 = new Pulga(poblacion=150)
+	const pulguitas2 = new Pulga(poblacion=200)
+	const pulguitas3 = new Pulga(poblacion=300)
+	
+	const garrapatas1 = new Garrapata(poblacion=120)
+	const garrapatas2 = new Garrapata(poblacion=180)
+	const garrapatas3 = new Garrapata(poblacion=240)
+	
+	const dengue = new Mosquito(poblacion=300)
+	const mosquitoComun = new Mosquito(poblacion=500)
+	const zika = new Mosquito(poblacion=150)
+	
+	/*Test a las instancias de Cucaracha*/
+	assert.equals(50, cucarachasVoladoras.nivelDeDanio())
+	assert.that(cucarachasVoladoras.transmiteEnfermedades())
+	assert.equals(125, cucarachasMini.nivelDeDanio())
+	assert.notThat(cucarachasMini.transmiteEnfermedades())
+	assert.equals(4.5, cucharachasGigantes.nivelDeDanio())
+	assert.notThat(cucharachasGigantes.transmiteEnfermedades())
+	
+	/*Test a las instancias de Pulga*/
+	assert.equals(300, pulguitas1.nivelDeDanio())
+	assert.that(pulguitas1.transmiteEnfermedades())
+	assert.equals(400, pulguitas2.nivelDeDanio())
+	assert.that(pulguitas2.transmiteEnfermedades())
+	assert.equals(600, pulguitas3.nivelDeDanio())
+	assert.that(pulguitas3.transmiteEnfermedades())
+	
+	/*Test a las instancias de Garrapata*/
+	assert.equals(240, garrapatas1.nivelDeDanio())
+	assert.that(garrapatas1.transmiteEnfermedades())
+	assert.equals(360, garrapatas2.nivelDeDanio())
+	assert.that(garrapatas2.transmiteEnfermedades())
+	assert.equals(480, garrapatas3.nivelDeDanio())
+	assert.that(garrapatas3.transmiteEnfermedades())
+	
+	/*Test a las instancias de Mosquito*/
+	assert.equals(300, dengue.nivelDeDanio())
+	assert.that(dengue.transmiteEnfermedades())
+	assert.equals(500, mosquitoComun.nivelDeDanio())
+	assert.notThat(mosquitoComun.transmiteEnfermedades())
+	assert.equals(150, zika.nivelDeDanio())
+	assert.that(zika.transmiteEnfermedades())
+	
+	/*Efectos de un ataque sobre las plagas*/
+	/*Instancias y configuraciones de las clases Hogar, Huerta y Mascota*/
+	const casa1 = new Hogar(nivelDeMugre=100, confort=200)
+	const casa2 = new Hogar(nivelDeMugre=100, confort=199)
+	const casa3 = new Hogar(nivelDeMugre=100, confort=210)
+	
+	const huerta1 = new Huerta(capacidadDeProduccion=80)
+	const huerta2 = new Huerta(capacidadDeProduccion=90)
+	const huerta3 = new Huerta(capacidadDeProduccion=100)
+	
+	const perro = new Mascota(nivelDeSalud=200)
+	const gato = new Mascota(nivelDeSalud=350)
+	const loro = new Mascota(nivelDeSalud=250)
+	
+	/*Efectos de un ataque sobre las plagas*/
+	cucarachasVoladoras.atacar(casa1)
+	assert.equals(110, cucarachasVoladoras.poblacion())
+	assert.equals(13, cucarachasVoladoras.pesoPromedio())
+	dengue.atacar(casa2)
+	assert.equals(330, dengue.poblacion())
+	pulguitas1.atacar(perro)
+	assert.equals(165, pulguitas1.poblacion())
+	garrapatas1.atacar(gato)
+	assert.equals(144, garrapatas1.poblacion())
+	zika.atacar(loro)
+	assert.equals(165, zika.poblacion())	
+	
+	
+
+}

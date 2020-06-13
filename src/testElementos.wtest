@@ -1,0 +1,71 @@
+import elementos.*
+import plagas.*
+
+test "Testeo a los elementos y su efecto cuando lo ataca una plaga" {
+	/*Instancias y configuraciones de las clases Hogar, Huerta y Mascota*/
+	const casa1 = new Hogar(nivelDeMugre=100, confort=200)
+	const casa2 = new Hogar(nivelDeMugre=100, confort=199)
+	const casa3 = new Hogar(nivelDeMugre=100, confort=210)
+	
+	const huerta1 = new Huerta(capacidadDeProduccion=80)
+	const huerta2 = new Huerta(capacidadDeProduccion=90)
+	const huerta3 = new Huerta(capacidadDeProduccion=100)
+	
+	const perro = new Mascota(nivelDeSalud=200)
+	const gato = new Mascota(nivelDeSalud=350)
+	const loro = new Mascota(nivelDeSalud=250)
+	
+	/*Test a las instancias de Hogar*/
+	assert.that(casa1.esBueno())
+	assert.notThat(casa2.esBueno())
+	assert.that(casa3.esBueno())
+	
+	/*Test a las instancias de Huerta*/
+	
+	
+	/*Test a las instancias de Mascota*/
+	assert.notThat(perro.esBueno())
+	assert.that(gato.esBueno())
+	assert.notThat(loro.esBueno())
+	
+	/*Efecto de un ataque en los elementos*/
+	
+	/*Instancias y configuraciones de las clases Pulga, Garrapata, Mosquito y Cucaracha*/
+	const cucarachasVoladoras = new Cucaracha(poblacion=100, pesoPromedio=11)
+	const cucarachasMini = new Cucaracha(poblacion=250, pesoPromedio=8)
+	const cucharachasGigantes= new Cucaracha(poblacion=9, pesoPromedio=20)
+	
+	const pulguitas1 = new Pulga(poblacion=150)
+	const pulguitas2 = new Pulga(poblacion=200)
+	const pulguitas3 = new Pulga(poblacion=300)
+	
+	const garrapatas1 = new Garrapata(poblacion=120)
+	const garrapatas2 = new Garrapata(poblacion=180)
+	const garrapatas3 = new Garrapata(poblacion=240)
+	
+	const dengue = new Mosquito(poblacion=300)
+	const mosquitoComun = new Mosquito(poblacion=500)
+	const zika = new Mosquito(poblacion=150)
+	
+	/*Ataque de las plagas a los elementos y el resultado del ataque*/
+	/*Ataque de plagas a las instancias de la Casa*/
+	cucarachasVoladoras.atacar(casa1)
+	assert.equals(150, casa1.nivelDeMugre())	
+	pulguitas1.atacar(casa2)
+	assert.equals(400, casa2.nivelDeMugre())
+	garrapatas1.atacar(casa3)
+	assert.equals(340, casa3.nivelDeMugre())
+	
+	/*Ataque de plagas a las intancias de Huerta*/
+	
+	/*Ataque de plagas a las instancias de Mascota*/
+	pulguitas2.atacar(perro)
+	assert.equals(0, perro.nivelDeSalud())
+	dengue.atacar(gato)
+	assert.equals(50, gato.nivelDeSalud())
+	zika.atacar(loro)
+	assert.equals(100, loro.nivelDeSalud())	
+	
+	
+	
+}

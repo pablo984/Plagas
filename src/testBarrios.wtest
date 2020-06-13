@@ -1,0 +1,35 @@
+import barrios.*
+import elementos.*
+
+test "Test a los barrios" {
+	/*Instancias de la clase Barrio*/
+	const villaTesei = new Barrio()
+	const villaClub = new Barrio()
+	const villaCrespo = new Barrio()
+	
+	/*Instancias y configuraciones de las clases Hogar, Huerta y Mascota*/
+	const casa1 = new Hogar(nivelDeMugre=100, confort=200)
+	const casa2 = new Hogar(nivelDeMugre=100, confort=199)
+	const casa3 = new Hogar(nivelDeMugre=100, confort=210)
+	
+	const huerta1 = new Huerta(capacidadDeProduccion=80)
+	const huerta2 = new Huerta(capacidadDeProduccion=90)
+	const huerta3 = new Huerta(capacidadDeProduccion=100)
+	
+	const perro = new Mascota(nivelDeSalud=200)
+	const gato = new Mascota(nivelDeSalud=350)
+	const loro = new Mascota(nivelDeSalud=250)
+	
+	/*Configuración de los barrios*/
+	villaTesei.agregarElementos([casa1, perro, gato, loro])
+	villaClub.agregarElementos([casa2, perro, loro])
+	villaCrespo.agregarElementos([casa3, gato])
+	
+	/*Test a los barrios*/
+	assert.notThat(villaTesei.esBarrioCopado())
+	assert.notThat(villaClub.esBarrioCopado())
+	assert.that(villaCrespo.esBarrioCopado())
+	
+	
+
+}
