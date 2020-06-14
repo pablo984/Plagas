@@ -7,7 +7,7 @@ test "Testeo a los elementos y su efecto cuando lo ataca una plaga" {
 	const casa2 = new Hogar(nivelDeMugre=100, confort=199)
 	const casa3 = new Hogar(nivelDeMugre=100, confort=210)
 	
-	const huerta1 = new Huerta(capacidadDeProduccion=80)
+	const huerta1 = new Huerta(capacidadDeProduccion=70)
 	const huerta2 = new Huerta(capacidadDeProduccion=90)
 	const huerta3 = new Huerta(capacidadDeProduccion=100)
 	
@@ -21,15 +21,16 @@ test "Testeo a los elementos y su efecto cuando lo ataca una plaga" {
 	assert.that(casa3.esBueno())
 	
 	/*Test a las instancias de Huerta*/
-	
+	assert.notThat(huerta1.esBueno())
+	assert.that(huerta2.esBueno())
+	assert.that(huerta3.esBueno())
 	
 	/*Test a las instancias de Mascota*/
 	assert.notThat(perro.esBueno())
 	assert.that(gato.esBueno())
 	assert.notThat(loro.esBueno())
 	
-	/*Efecto de un ataque en los elementos*/
-	
+	/*Efecto de un ataque en los elementos*/	
 	/*Instancias y configuraciones de las clases Pulga, Garrapata, Mosquito y Cucaracha*/
 	const cucarachasVoladoras = new Cucaracha(poblacion=100, pesoPromedio=11)
 	const cucarachasMini = new Cucaracha(poblacion=250, pesoPromedio=8)
@@ -55,8 +56,18 @@ test "Testeo a los elementos y su efecto cuando lo ataca una plaga" {
 	assert.equals(400, casa2.nivelDeMugre())
 	garrapatas1.atacar(casa3)
 	assert.equals(340, casa3.nivelDeMugre())
+	garrapatas2.atacar(casa1)
+	assert.equals(510, casa1.nivelDeMugre())//Teniendo en cuenta que la casa había aumentado su nivelDeMugre a 150
 	
 	/*Ataque de plagas a las intancias de Huerta*/
+	cucarachasMini.atacar(huerta1)
+	assert.equals(67.5, huerta1.nivelDeProduccion())
+	cucharachasGigantes.atacar(huerta2)
+	assert.equals(79.55, huerta2.nivelDeProduccion())
+	pulguitas3.atacar(huerta3)
+	assert.equals(10, huerta3.nivelDeProduccion())
+	garrapatas3.atacar(huerta2)
+	assert.equals(21.55, huerta2.nivelDeProduccion())//Teniendo en cuenta de la huerta había disminuído su NivelDeProduccion en 79.55
 	
 	/*Ataque de plagas a las instancias de Mascota*/
 	pulguitas2.atacar(perro)
@@ -64,8 +75,10 @@ test "Testeo a los elementos y su efecto cuando lo ataca una plaga" {
 	dengue.atacar(gato)
 	assert.equals(50, gato.nivelDeSalud())
 	zika.atacar(loro)
-	assert.equals(100, loro.nivelDeSalud())	
-	
+	assert.equals(100, loro.nivelDeSalud())
+	mosquitoComun.atacar(loro)
+	assert.equals(100, loro.nivelDeSalud())/* Con éste test lo que quiero demostrar es que como el mosquitoComun NO transmite
+														  enfermedades, el loro al recibir su ataque no sufre cambios en su nivelDeSalud */
 	
 	
 }

@@ -66,18 +66,44 @@ test "Test a las plagas" {
 	const loro = new Mascota(nivelDeSalud=250)
 	
 	/*Efectos de un ataque sobre las plagas*/
+	/*Cucarachas voladoras*/
 	cucarachasVoladoras.atacar(casa1)
 	assert.equals(110, cucarachasVoladoras.poblacion())
 	assert.equals(13, cucarachasVoladoras.pesoPromedio())
+	
+	/*Mosquito dengue*/
 	dengue.atacar(casa2)
 	assert.equals(330, dengue.poblacion())
+	
+	/*Pulguita1*/
 	pulguitas1.atacar(perro)
 	assert.equals(165, pulguitas1.poblacion())
+	
+	/*Garrapatas1*/
 	garrapatas1.atacar(gato)
 	assert.equals(144, garrapatas1.poblacion())
-	zika.atacar(loro)
-	assert.equals(165, zika.poblacion())	
 	
+	/*Mosquito zika*/
+	zika.atacar(loro)
+	assert.equals(165, zika.poblacion())
+	
+	/*Cucarachas mini*/
+	cucarachasMini.atacar(casa3)
+	assert.equals(275, cucarachasMini.poblacion())
+	assert.equals(10, cucarachasMini.pesoPromedio())
+	
+	/*Pulguitas2*/
+	pulguitas2.atacar(huerta1)
+	assert.equals(220, pulguitas2.poblacion())
+	
+	/*Cucarachas gigantes*/
+	cucharachasGigantes.atacar(huerta2)
+	assert.equals(9.9, cucharachasGigantes.poblacion())
+	assert.equals(22, cucharachasGigantes.pesoPromedio())
+	
+	/*Mosquito común*/	
+	mosquitoComun.atacar(huerta3)
+	assert.equals(550, mosquitoComun.poblacion())
 	
 
 }

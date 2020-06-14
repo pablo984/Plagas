@@ -1,5 +1,6 @@
 import barrios.*
 import elementos.*
+import plagas.*
 
 test "Test a los barrios" {
 	/*Instancias de la clase Barrio*/
@@ -14,21 +15,50 @@ test "Test a los barrios" {
 	
 	const huerta1 = new Huerta(capacidadDeProduccion=80)
 	const huerta2 = new Huerta(capacidadDeProduccion=90)
-	const huerta3 = new Huerta(capacidadDeProduccion=100)
+	const huerta3 = new Huerta(capacidadDeProduccion=100, nivelDeProduccion=90)
 	
 	const perro = new Mascota(nivelDeSalud=200)
 	const gato = new Mascota(nivelDeSalud=350)
 	const loro = new Mascota(nivelDeSalud=250)
 	
 	/*Configuración de los barrios*/
-	villaTesei.agregarElementos([casa1, perro, gato, loro])
-	villaClub.agregarElementos([casa2, perro, loro])
-	villaCrespo.agregarElementos([casa3, gato])
+	villaTesei.agregarElementos([casa1, perro, gato, loro, huerta3])
+	villaClub.agregarElementos([casa2, perro, loro, huerta2])
+	villaCrespo.agregarElementos([casa3, gato, huerta1])
 	
 	/*Test a los barrios*/
-	assert.notThat(villaTesei.esBarrioCopado())
+	assert.that(villaTesei.esBarrioCopado())
 	assert.notThat(villaClub.esBarrioCopado())
 	assert.that(villaCrespo.esBarrioCopado())
+	
+	/*Test sobre el efecto de atacar un barrio con una plaga*/
+	/*Instanciaa y configuración de la clase Cucaracha*/
+	const cucarachasVoladoras = new Cucaracha(poblacion=100, pesoPromedio=11)
+	
+	/*Ataque con cucarachas al barrio de Villa Tesei*/
+	villaTesei.atacarElementosCon(cucarachasVoladoras)
+	
+	/*Test sobre las consecuencias de cada elemento del barrio de Villa Tesei al ser atacado por cucarachas*/
+	/*Consecuencias del ataque a casa1*/
+	assert.equals(150, casa1.nivelDeMugre())
+	assert.notThat(casa1.esBueno())
+	
+	/*Consecuencias del ataque al perro*/
+	assert.equals(145, perro.nivelDeSalud())//Con el ataque a la casa1, las cucarachas aumentaron un 10% su población.
+	
+	/*Consecuencias del ataque al gato*/
+	assert.equals(289.5, gato.nivelDeSalud())//Con el ataque al perro, las cucarachas aumentaron un 10% su población.
+	
+	/*Consecuencias del ataque al loro*/
+	assert.equals(183.45, loro.nivelDeSalud())//Con el ataque al gato, las cucarachas aumentaron un 10% su población.
+	
+	/*Consecuencias del ataque a la huerta3*/
+	assert.equals(72.6795, huerta3.nivelDeProduccion())//Con el ataque al loro, las cucarachas aumentaron un 10% su población.
+	
+	/*Finalmente, con el ataque a la huerta3, las cucarachas aumentaron su población un 10% más y aumentaron su pesoPromedio
+	  en 10 grs más*/
+	assert.equals(161.051, cucarachasVoladoras.poblacion())
+	assert.equals(21, cucarachasVoladoras.pesoPromedio())
 	
 	
 

@@ -5,7 +5,7 @@ class Hogar {
 	var property confort
 	
 		method esBueno() {
-		return nivelDeMugre <= (confort / 2)  
+		return nivelDeMugre <= confort / 2  
 	}
 	method recibirAtaque(unaPlaga) {
 		nivelDeMugre = nivelDeMugre + unaPlaga.nivelDeDanio()		
@@ -14,16 +14,17 @@ class Hogar {
 
 class Huerta {
 	var property capacidadDeProduccion
+	var property nivelDeProduccion = 80
 	
 	method esBueno() {
-		 return capacidadDeProduccion 
+		 return capacidadDeProduccion > nivelDeProduccion
 	}
 	method recibirAtaque(unaPlaga) {
 		if (unaPlaga.transmiteEnfermedades()) {
-			capacidadDeProduccion = (capacidadDeProduccion - unaPlaga.nivelDeDanio() * 0.1) + 10
+			nivelDeProduccion = nivelDeProduccion - (unaPlaga.nivelDeDanio() * 0.1) - 10
 		}
 		else {
-			capacidadDeProduccion = capacidadDeProduccion - unaPlaga.nivelDeDanio() * 0.1
+			nivelDeProduccion = nivelDeProduccion - unaPlaga.nivelDeDanio() * 0.1
 		}		
 	}	
 }

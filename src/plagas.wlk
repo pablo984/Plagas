@@ -16,9 +16,8 @@ class Pulga {
 class Garrapata inherits Pulga {
 	override method atacar(elemento) {
 		elemento.recibirAtaque(self)
-		poblacion = poblacion * 1.2
+		poblacion = poblacion * 1.2 
 	}
-	
 }
 
 class Mosquito inherits Pulga {
