@@ -60,6 +60,8 @@ test "Test a las plagas" {
 	const huerta1 = new Huerta(capacidadDeProduccion=80)
 	const huerta2 = new Huerta(capacidadDeProduccion=90)
 	const huerta3 = new Huerta(capacidadDeProduccion=100)
+	/*Configuración del objeto "valoresHuertas" para setear su "nivelMinimoDeProduccion"*/
+	valoresHuertas.nivelMinimoDeProduccion(80)
 	
 	const perro = new Mascota(nivelDeSalud=200)
 	const gato = new Mascota(nivelDeSalud=350)

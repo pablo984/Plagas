@@ -10,6 +10,8 @@ test "Testeo a los elementos y su efecto cuando lo ataca una plaga" {
 	const huerta1 = new Huerta(capacidadDeProduccion=70)
 	const huerta2 = new Huerta(capacidadDeProduccion=90)
 	const huerta3 = new Huerta(capacidadDeProduccion=100)
+	/*Configuración del objeto "valoresHuertas" para setear su "nivelMinimoDeProduccion"*/
+	valoresHuertas.nivelMinimoDeProduccion(80)
 	
 	const perro = new Mascota(nivelDeSalud=200)
 	const gato = new Mascota(nivelDeSalud=350)
@@ -61,13 +63,13 @@ test "Testeo a los elementos y su efecto cuando lo ataca una plaga" {
 	
 	/*Ataque de plagas a las intancias de Huerta*/
 	cucarachasMini.atacar(huerta1)
-	assert.equals(67.5, huerta1.nivelDeProduccion())
+	assert.equals(57.5, huerta1.capacidadDeProduccion())
 	cucharachasGigantes.atacar(huerta2)
-	assert.equals(79.55, huerta2.nivelDeProduccion())
+	assert.equals(89.55, huerta2.capacidadDeProduccion())
 	pulguitas3.atacar(huerta3)
-	assert.equals(10, huerta3.nivelDeProduccion())
+	assert.equals(0, huerta3.capacidadDeProduccion())// Valores en 0 porque en el método del ataque tengo un "0.max"
 	garrapatas3.atacar(huerta2)
-	assert.equals(21.55, huerta2.nivelDeProduccion())//Teniendo en cuenta de la huerta había disminuído su NivelDeProduccion en 79.55
+	assert.equals(0, huerta2.capacidadDeProduccion())// Valores en 0 porque en el método del ataque tengo un "0.max"
 	
 	/*Ataque de plagas a las instancias de Mascota*/
 	pulguitas2.atacar(perro)

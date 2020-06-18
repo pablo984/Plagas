@@ -15,7 +15,9 @@ test "Test a los barrios" {
 	
 	const huerta1 = new Huerta(capacidadDeProduccion=80)
 	const huerta2 = new Huerta(capacidadDeProduccion=90)
-	const huerta3 = new Huerta(capacidadDeProduccion=100, nivelDeProduccion=90)
+	const huerta3 = new Huerta(capacidadDeProduccion=100)
+	/*Configuración del objeto "valoresHuertas" para setear su "nivelMinimoDeProduccion"*/
+	valoresHuertas.nivelMinimoDeProduccion(80)
 	
 	const perro = new Mascota(nivelDeSalud=200)
 	const gato = new Mascota(nivelDeSalud=350)
@@ -53,7 +55,7 @@ test "Test a los barrios" {
 	assert.equals(183.45, loro.nivelDeSalud())//Con el ataque al gato, las cucarachas aumentaron un 10% su población.
 	
 	/*Consecuencias del ataque a la huerta3*/
-	assert.equals(72.6795, huerta3.nivelDeProduccion())//Con el ataque al loro, las cucarachas aumentaron un 10% su población.
+	assert.equals(75.359, huerta3.capacidadDeProduccion())//Con el ataque al loro, las cucarachas aumentaron un 10% su población.
 	
 	/*Finalmente, con el ataque a la huerta3, las cucarachas aumentaron su población un 10% más y aumentaron su pesoPromedio
 	  en 10 grs más*/

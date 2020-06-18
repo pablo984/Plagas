@@ -14,19 +14,22 @@ class Hogar {
 
 class Huerta {
 	var property capacidadDeProduccion
-	var property nivelDeProduccion = 80
+	//Se quitó el atributo "nivelDeProduccion" para agregar el objeto "valoresHuertas"
 	
 	method esBueno() {
-		 return capacidadDeProduccion > nivelDeProduccion
+		 return capacidadDeProduccion > valoresHuertas.nivelMinimoDeProduccion()
 	}
-	method recibirAtaque(unaPlaga) {
+	/*Se agrega al método el "max.0" para que no de valores negativos*/
+	method recibirAtaque(unaPlaga) { //Se quitó el "else" y se colocó, lo que decía allí, como una indicación al principo.
+		capacidadDeProduccion = 0.max(capacidadDeProduccion - unaPlaga.nivelDeDanio() * 0.1) // (Esto antes estaba en el "else")
 		if (unaPlaga.transmiteEnfermedades()) {
-			nivelDeProduccion = nivelDeProduccion - (unaPlaga.nivelDeDanio() * 0.1) - 10
+			capacidadDeProduccion = 0.max(capacidadDeProduccion - (unaPlaga.nivelDeDanio() * 0.1) - 10)
 		}
-		else {
-			nivelDeProduccion = nivelDeProduccion - unaPlaga.nivelDeDanio() * 0.1
-		}		
 	}	
+}
+
+object valoresHuertas {
+	var property nivelMinimoDeProduccion = 0
 }
 
 class Mascota {
